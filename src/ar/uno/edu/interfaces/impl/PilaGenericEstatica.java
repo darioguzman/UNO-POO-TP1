@@ -1,25 +1,31 @@
 package ar.uno.edu.interfaces.impl;
 
-import ar.uno.edu.interfaces.Pila;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
-public class PilaEstatica implements Pila {
+import ar.uno.edu.interfaces.PilaGeneric;
+
+
+public class PilaGenericEstatica <E> implements PilaGeneric<E> {
 	
 	public static int posicionActual = 0;
 	
-	private Integer pila[];
+	private E pila[];
 	
 	private Integer tamanoPila;
 	
+	private String genericClass;
 	
-	public PilaEstatica(Integer tamanoPila){
+	public PilaGenericEstatica(Class<E> clazz , Integer tamanoPila){
 	
-		this.pila = new Integer[tamanoPila];
+		this.pila = (E[]) Array.newInstance(clazz, tamanoPila);
 		
 		this.tamanoPila = tamanoPila;
+		
 	}
 	
 	@Override
-	public void push(Integer dato) {
+	public void push(E dato) {
 	
 		if (posicionActual == pila.length) {
 			
@@ -27,9 +33,19 @@ public class PilaEstatica implements Pila {
 			
 		} else {
 			
-			pila[posicionActual] = dato;
-			
-			posicionActual++;
+			try {
+
+				pila[posicionActual] = dato;
+				
+				posicionActual++;
+				
+			} catch (Exception e) {
+
+				System.err.println("No se puede insertar el dato: " + dato + " ya que no es del tipo: " + pila.getClass().getSimpleName());
+		
+			}
+				
+				
 		}
 		
 	}
@@ -61,11 +77,11 @@ public class PilaEstatica implements Pila {
 			posicionActual--;
 		
 		}
-		
+
 	}
 	
 	@Override
-	public Integer peek() {
+	public E peek() {
 	
 		if (posicionActual == 0){
 			
@@ -82,7 +98,6 @@ public class PilaEstatica implements Pila {
 		}
 		
 		return pila [posicionActual];
-		
 	}
 	
 	@Override
@@ -94,34 +109,8 @@ public class PilaEstatica implements Pila {
 	@Override
 	public void empty() {
 	
-		this.pila = new Integer [tamanoPila];
+		this.pila = (E[]) Array.newInstance(this.pila.getClass(), tamanoPila);
 		
 	}
-	
-	
-	
-	public Integer[] getPila() {
-		
-		return pila;
-	}
-
-	
-	public void setPila(Integer[] pila) {
-	
-		this.pila = pila;
-	}
-
-	
-	public Integer getTamanoPila() {
-	
-		return tamanoPila;
-	}
-
-	
-	public void setTamanoPila(Integer tamanoPila) {
-	
-		this.tamanoPila = tamanoPila;
-	}
-
 	
 }

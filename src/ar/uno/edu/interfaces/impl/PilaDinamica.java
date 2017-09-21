@@ -1,42 +1,59 @@
 package ar.uno.edu.interfaces.impl;
 
+import java.util.LinkedList;
+
 import ar.uno.edu.interfaces.Pila;
 
 
 public class PilaDinamica implements Pila {
 	
-	@Override
-	public void push(String dato) {
+	LinkedList<Integer> pila = new LinkedList<Integer>();
 	
-		// TODO Auto-generated method stub
-		
+	@Override
+	public void push(Integer dato) {
+	
+		pila.addLast(dato);
 	}
 	
 	@Override
 	public void pop() {
 	
-		// TODO Auto-generated method stub
+		if (pila.isEmpty()) {
+			
+			System.err.println("La pila se encuentra vacía.");
+			
+			return;
+			
+		}
 		
+		pila.removeLast();
 	}
 	
 	@Override
-	public String peek() {
+	public Integer peek() {
 	
-		// TODO Auto-generated method stub
-		return null;
+		if (pila.isEmpty()) {
+			
+			System.err.println("La pila se encuentra vacía.");
+			
+			return null;
+			
+		}
+
+		return pila.peekLast();
+		
 	}
 	
 	@Override
 	public boolean isEmpty() {
 	
-		// TODO Auto-generated method stub
-		return false;
+		return pila.isEmpty();
 	}
 	
 	@Override
 	public void empty() {
 	
-		// TODO Auto-generated method stub
+		pila.clear();
 		
 	}
 	

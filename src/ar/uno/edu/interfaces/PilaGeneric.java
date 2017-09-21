@@ -1,13 +1,13 @@
 package ar.uno.edu.interfaces;
 
 
-public interface Pila {
+public interface PilaGeneric <E> {
 	
 	/**
 	 * @param dato
-	 * 		Tipo String, apila dicho dato en el tope de la pila
+	 * 		Tipo @Generic, apila dicho dato en el tope de la pila
 	 */
-	public void push( Integer dato );
+	public void push( E dato );
 	
 	/**
 	 * desapila el dato apuntado por el tope de la pila
@@ -17,7 +17,7 @@ public interface Pila {
 	/**
 	 * devuelve el dato apuntado por el tope de la pila, pero no lo desapila.
 	 */
-	public Integer peek( );
+	public E peek( );
 	
 	/**
 	 * @return true/false
@@ -29,4 +29,5 @@ public interface Pila {
 	 * vaciar la pila
 	 */
 	public void empty( );
+	
 }
